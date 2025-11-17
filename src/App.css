@@ -1,0 +1,573 @@
+/* ===== พื้นฐานทั้งหน้า ===== */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f0f2f5;
+  color: #050505;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* =========================
+   NAVBAR แบบ Facebook ปัจจุบัน
+   ========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #dddfe2;
+}
+
+/* ซ้าย: logo + search */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #0866ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 999px;
+  background: #f0f2f5;
+}
+
+.nav-search-icon {
+  font-size: 14px;
+}
+
+.nav-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+/* กลาง: แท็บเมนู */
+.nav-center {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.nav-tab {
+  width: 80px;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-tab:hover {
+  background: #f0f2f5;
+}
+
+.nav-tab-active {
+  color: #0866ff;
+  border-bottom: 3px solid #0866ff;
+  border-radius: 0;
+}
+
+/* ขวา: ปุ่มกลม + โปรไฟล์ + toggle theme */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-circle-btn,
+.nav-profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: #e4e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-profile {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* badge แจ้งเตือน */
+.nav-bell-btn {
+  position: relative;
+}
+
+.nav-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #e41e3f;
+  color: #ffffff;
+  padding: 0 4px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* ไอคอน toggle theme กลม ๆ */
+.theme-toggle-icon {
+  font-size: 16px;
+}
+
+/* =========================
+   MAIN / FEED พื้นฐาน
+   ========================= */
+
+.main {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.feed-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* การ์ดพื้นฐาน */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  padding: 12px 12px 8px;
+}
+
+/* กล่องสร้างโพสต์ */
+.create-post-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.placeholder {
+  color: #65676b;
+}
+
+.create-post-textarea {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 8px;
+  border: 1px solid #ccd0d5;
+  padding: 8px;
+  resize: vertical;
+}
+
+.create-post-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  background: #0866ff;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+/* โพสต์ */
+.post-card {
+  padding-bottom: 8px;
+}
+
+.post-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #e4e6eb;
+  display: inline-block;
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #e4e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-name {
+  font-weight: 600;
+}
+
+.post-time {
+  font-size: 12px;
+  color: #65676b;
+}
+
+.post-content {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #65676b;
+  padding: 6px 0;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 0;
+}
+
+.action-btn {
+  border: none;
+  background: transparent;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #65676b;
+}
+
+.action-btn:hover {
+  background: #f0f2f5;
+}
+
+.action-btn.active {
+  color: #0866ff;
+  font-weight: 600;
+}
+
+/* =========================
+   LAYOUT 3 คอลัมน์
+   ========================= */
+
+.layout {
+  display: flex;
+  justify-content: center;
+  padding: 16px 12px;
+  gap: 12px;
+}
+
+.feed-column {
+  flex: 0 0 680px;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar {
+  flex: 0 0 260px;
+}
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Sidebar */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sidebar-item:hover {
+  background: #e4e6eb;
+}
+
+.sidebar-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #e4e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-profile span {
+  font-weight: 600;
+}
+
+.sidebar-see-more {
+  margin-top: 8px;
+}
+
+/* ===== Stories Bar ===== */
+.stories-bar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  overflow-x: auto;
+}
+
+/* การ์ดแต่ละใบ */
+.story-card {
+  position: relative;
+  width: 110px;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f2f5;
+  flex-shrink: 0;
+}
+
+/* พื้นหลังสตอรี่ (ตอนนี้สีเทา ถ้ามีรูปให้ใช้ background-image แทนได้) */
+.story-bg {
+  width: 100%;
+  height: 100%;
+  background: #d8d8d8;
+}
+
+/* วงโปรไฟล์ด้านบนซ้าย */
+.story-avatar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.story-avatar-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 3px solid #0866ff; /* วงสีฟ้า */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* ชื่อสตอรี่ด้านล่าง */
+.story-name {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* การ์ดแรก: ปุ่ม + ด้านล่างตรงกลาง */
+.story-card-create .story-plus-btn {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: #0866ff;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* เอาปุ่ม + ของการ์ดอื่นออก */
+.story-plus-btn {
+  display: none;
+}
+
+/* ===== ปรับให้เข้ากับ Dark Mode ===== */
+body.dark-mode .story-card {
+  background: #2b2b2b;
+}
+
+body.dark-mode .story-bg {
+  background: #3a3b3c;
+}
+
+/* Sidebar right extra */
+.sidebar-section {
+  padding: 4px 0;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  color: #65676b;
+  margin: 0 0 4px 0;
+}
+
+.sidebar-ad-card {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-top: 4px;
+}
+
+.sidebar-ad-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: #d8d8d8;
+}
+
+.sidebar-ad-text {
+  font-size: 13px;
+}
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+body.dark-mode {
+  background-color: #000000;
+  color: #e4e6eb;
+}
+
+/* Navbar ในโหมดมืด */
+body.dark-mode .navbar {
+  background: #18191a;
+  border-bottom: 1px solid #3a3b3c;
+}
+
+/* search ในโหมดมืด */
+body.dark-mode .nav-search {
+  background: #3a3b3c;
+}
+
+body.dark-mode .nav-search-input {
+  color: #e4e6eb;
+}
+
+/* ปุ่มวงกลม + avatar ในโหมดมืด */
+body.dark-mode .nav-circle-btn,
+body.dark-mode .nav-profile,
+body.dark-mode .avatar,
+body.dark-mode .avatar-sm {
+  background: #3a3b3c;
+  color: #e4e6eb;
+}
+
+/* tab hover ในโหมดมืด */
+body.dark-mode .nav-tab:hover {
+  background: #3a3b3c;
+}
+
+/* ไอคอน toggle ในโหมดมืด */
+body.dark-mode .theme-toggle-icon {
+  background: #3a3b3c;
+  color: #e4e6eb;
+}
+
+/* card / ข้อความเทา ในโหมดมืด */
+body.dark-mode .card {
+  background: #242526;
+  color: #e4e6eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .placeholder,
+body.dark-mode .post-time,
+body.dark-mode .post-stats,
+body.dark-mode .sidebar-title,
+body.dark-mode .action-btn {
+  color: #b0b3b8;
+}
+
+/* action hover */
+body.dark-mode .action-btn:hover {
+  background: #3a3b3c;
+}
+
+/* ปุ่มหลักในโหมดมืด */
+body.dark-mode .btn-primary {
+  background: #2374e1;
+}
+
+/* textarea / input ในโหมดมืด */
+body.dark-mode .create-post-textarea,
+body.dark-mode .comment-input {
+  background: #3a3b3c;
+  color: #e4e6eb;
+  border-color: #3a3b3c;
+}
+
+/* Sidebar & Story ในโหมดมืด */
+body.dark-mode .sidebar-item:hover {
+  background: #3a3b3c;
+}
+
+body.dark-mode .story-card {
+  background: #2b2b2b;
+}
+
+body.dark-mode .sidebar-ad-card {
+  background: #242526;
+}
