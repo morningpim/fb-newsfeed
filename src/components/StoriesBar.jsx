@@ -1,69 +1,61 @@
-// src/components/StoriesBar.jsx
 import React from "react";
-import "../App.css";
 
-// ข้อมูลสตอรี่ตัวอย่าง
-const stories = [
-  {
-    id: 1,
-    name: "คุณ",
-    label: "สร้างสตอรี่",
-    type: "create",   // 👈 การ์ดแรกเป็นโหมดสร้างสตอรี่
-    imageUrl: ""
+const styles = {
+  container: {
+    backgroundColor: "var(--surface)",
+    borderRadius: 8,
+    padding: 12,
+    display: "flex",
+    gap: 8,
+    overflowX: "auto",
   },
-  {
-    id: 2,
-    name: "Friend 1",
-    type: "normal",
-    imageUrl: ""
+  storyCard: {
+    width: 112,
+    height: 200,
+    borderRadius: 12,
+    overflow: "hidden",
+    backgroundColor: "var(--surface-alt)",
+    position: "relative",
+    flexShrink: 0,
   },
-  {
-    id: 3,
-    name: "Friend 2",
-    type: "normal",
-    imageUrl: ""
+  avatar: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    border: "3px solid var(--accent)",
+    backgroundColor: "var(--surface)",
   },
-  {
-    id: 4,
-    name: "Friend 3",
-    type: "normal",
-    imageUrl: ""
-  }
+  label: {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10,
+    fontSize: 13,
+    fontWeight: 600,
+    color: "var(--text)",
+    textShadow: "0 1px 3px rgba(0,0,0,0.8)",
+  },
+};
+
+const STORIES = [
+  { id: 1, label: "สร้างสตอรี่" },
+  { id: 2, label: "Friend 1" },
+  { id: 3, label: "Friend 2" },
+  { id: 4, label: "Friend 3" },
 ];
 
-function StoriesBar() {
+export default function StoriesBar() {
   return (
-    <div className="card stories-bar">
-      {stories.map((s) => (
-        <div
-          key={s.id}
-          className={`story-card ${
-            s.type === "create" ? "story-card-create" : ""
-          }`}
-        >
-          {/* พื้นหลังสตอรี่ (ตอนนี้เป็นสีเทา ใช้ class .story-bg จาก App.css) */}
-          <div className="story-bg" />
-
-          {/* วงโปรไฟล์มีขอบสีฟ้า */}
-          <div className="story-avatar">
-            <div className="story-avatar-ring">
-              <div className="avatar avatar-sm" />
-            </div>
-          </div>
-
-          {/* การ์ดแรกมีปุ่ม + */}
-          {s.type === "create" && (
-            <button className="story-plus-btn">+</button>
-          )}
-
-          {/* ชื่อด้านล่าง */}
-          <div className="story-name">
-            {s.type === "create" ? "สร้างสตอรี่" : s.name}
-          </div>
+    <div style={styles.container}>
+      {STORIES.map((s) => (
+        <div key={s.id} style={styles.storyCard}>
+          <div style={styles.avatar} />
+          <span style={styles.label}>{s.label}</span>
         </div>
       ))}
     </div>
   );
 }
-
-export default StoriesBar;

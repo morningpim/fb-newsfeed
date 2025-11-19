@@ -1,43 +1,69 @@
-// src/components/CreatePostBox.jsx
 import React, { useState } from "react";
-import "../App.css";
 
-function CreatePostBox({ onCreatePost }) {
+export default function CreatePostBox({ onCreate }) {
   const [text, setText] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();            // กันไม่ให้รีเฟรชหน้า
-    const trimmed = text.trim();
-    if (!trimmed) return;         // ถ้าว่างไม่โพสต์
-    onCreatePost(trimmed);        // ส่งข้อความไปให้ App
-    setText("");                  // เคลียร์กล่องข้อความ
+  const handlePost = () => {
+    if (!text.trim()) return;
+    onCreate(text.trim());
+    setText("");
   };
 
   return (
-    <div className="card">
-      <div className="create-post-header">
-        <div className="avatar avatar-sm">Y</div>
-        <span className="placeholder">คุณกำลังคิดอะไรอยู่?</span>
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        <textarea
-          className="create-post-textarea"
-          placeholder="เขียนอะไรบางอย่าง..."
+    <div
+      style={{
+        backgroundColor: "var(--surface)",
+        borderRadius: 8,
+        padding: 12,
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            backgroundColor: "var(--surface-alt)",
+          }}
+        />
+        <input
+          style={{
+            flex: 1,
+            height: 40,
+            borderRadius: 999,
+            border: "none",
+            outline: "none",
+            padding: "8px 14px",
+            backgroundColor: "var(--input-bg)",
+            color: "var(--text)",
+            fontSize: 14,
+          }}
+          placeholder="คุณกำลังคิดอะไรอยู่?"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <div className="create-post-footer">
-          <button
-            className="btn-primary"
-            type="submit"   // กด Enter ก็โพสต์ได้
-          >
-            โพสต์
-          </button>
-        </div>
-      </form>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <button
+          style={{
+            padding: "6px 18px",
+            borderRadius: 999,
+            border: "none",
+            backgroundColor: "var(--accent)",
+            color: "#fff",
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+          onClick={handlePost}
+        >
+          โพสต์
+        </button>
+      </div>
     </div>
   );
 }
-
-export default CreatePostBox;
