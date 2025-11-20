@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom"; // ⭐ เพิ่ม useLocation
 
 const styles = {
   navbar: {
@@ -20,7 +21,6 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   left: {
     display: "flex",
     alignItems: "center",
@@ -57,7 +57,6 @@ const styles = {
     fontSize: 14,
     color: "var(--text)",
   },
-
   center: {
     display: "flex",
     alignItems: "center",
@@ -85,7 +84,6 @@ const styles = {
     borderRadius: 2,
     transition: "width 0.15s ease",
   }),
-
   right: {
     display: "flex",
     alignItems: "center",
@@ -116,8 +114,39 @@ const TABS = [
   { id: "gaming", icon: "🎮" },
 ];
 
-export default function Navbar() {
+const ROUTES = {
+  home: "/",
+  video: "/video",
+  market: "/market",
+  groups: "/groups",
+  gaming: "/gaming",
+};
+
+export default function Navbar({ onToggleAccountPanel }) {
   const [active, setActive] = useState("home");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // ⭐ Sync active tab กับ URL
+  useEffect(() => {
+    const path = location.pathname;
+
+    const matched = Object.entries(ROUTES).find(
+      ([key, val]) => val === path
+    );
+
+    if (matched) setActive(matched[0]);
+  }, [location.pathname]);
+
+  // ⭐ กดแท็บแล้วเปลี่ยนหน้า
+  const handleTabClick = (id) => {
+    setActive(id);
+    navigate(ROUTES[id]);
+  };
+
+  const handleAccountClick = () => {
+    if (onToggleAccountPanel) onToggleAccountPanel();
+  };
 
   return (
     <header style={styles.navbar}>
@@ -140,7 +169,7 @@ export default function Navbar() {
             <button
               key={t.id}
               style={styles.tab(active === t.id)}
-              onClick={() => setActive(t.id)}
+              onClick={() => handleTabClick(t.id)}
             >
               {t.icon}
               <div style={styles.underline(active === t.id)} />
@@ -153,7 +182,9 @@ export default function Navbar() {
           <button style={styles.circleBtn}>▦</button>
           <button style={styles.circleBtn}>💬</button>
           <button style={styles.circleBtn}>🔔</button>
-          <button style={styles.circleBtn}>Y</button>
+          <button style={styles.circleBtn} onClick={handleAccountClick}>
+            Y
+          </button>
         </div>
       </div>
     </header>
