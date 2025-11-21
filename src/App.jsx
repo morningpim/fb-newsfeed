@@ -11,7 +11,7 @@ import PostList from "./components/PostList";
 import Layout3Col from "./layout/Layout3Col";
 import VideoPage from "./components/VideoPage";
 
-// ✅ posts เริ่มต้น ถ้า localStorage ยังไม่มีอะไร
+
 const initialPosts = [
   {
     id: 1,
@@ -54,14 +54,14 @@ const initialPosts = [
 ];
 
 function App() {
-  // ✅ โหลด theme จาก localStorage (ถ้าไม่มีให้ default = "dark")
+  
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "dark";
     const saved = window.localStorage.getItem("fb_theme");
     return saved === "light" || saved === "dark" ? saved : "dark";
   });
 
-  // ✅ โหลด posts จาก localStorage (ถ้าไม่มีให้ใช้ initialPosts)
+  
   const [posts, setPosts] = useState(() => {
     if (typeof window === "undefined") return initialPosts;
     try {
@@ -77,7 +77,7 @@ function App() {
 
   const [showAccountPanel, setShowAccountPanel] = useState(false);
 
-  // ✅ sync theme -> body class + localStorage
+  
   useEffect(() => {
     if (theme === "dark") {
       document.body.classList.add("dark-mode");
@@ -87,7 +87,7 @@ function App() {
     window.localStorage.setItem("fb_theme", theme);
   }, [theme]);
 
-  // ✅ sync posts -> localStorage ทุกครั้งที่เปลี่ยน
+  
   useEffect(() => {
     try {
       window.localStorage.setItem("fb_posts", JSON.stringify(posts));
@@ -160,7 +160,7 @@ function App() {
       )}
 
       <Routes>
-        {/* หน้าหลัก (feed) */}
+        
         <Route
           path="/"
           element={
@@ -182,7 +182,7 @@ function App() {
           }
         />
 
-        {/* ⭐ หน้า Video */}
+        
         <Route path="/video" element={<VideoPage />} />
       </Routes>
     </>

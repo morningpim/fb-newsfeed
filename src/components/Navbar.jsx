@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // ⭐ เพิ่ม useLocation
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 const styles = {
   navbar: {
@@ -138,7 +138,7 @@ export default function Navbar({ onToggleAccountPanel }) {
     if (matched) setActive(matched[0]);
   }, [location.pathname]);
 
-  // ⭐ กดแท็บแล้วเปลี่ยนหน้า
+  
   const handleTabClick = (id) => {
     setActive(id);
     navigate(ROUTES[id]);
@@ -151,7 +151,7 @@ export default function Navbar({ onToggleAccountPanel }) {
   return (
     <header style={styles.navbar}>
       <div style={styles.inner}>
-        {/* LEFT */}
+       
         <div style={styles.left}>
           <div style={styles.logoCircle}>f</div>
           <div style={styles.searchWrapper}>
@@ -163,7 +163,7 @@ export default function Navbar({ onToggleAccountPanel }) {
           </div>
         </div>
 
-        {/* CENTER */}
+        
         <nav style={styles.center}>
           {TABS.map((t) => (
             <button
@@ -177,7 +177,7 @@ export default function Navbar({ onToggleAccountPanel }) {
           ))}
         </nav>
 
-        {/* RIGHT */}
+        
         <div style={styles.right}>
           <button style={styles.circleBtn}>▦</button>
           <button style={styles.circleBtn}>💬</button>

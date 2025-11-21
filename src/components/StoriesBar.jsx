@@ -8,7 +8,7 @@ const styles = {
     backgroundColor: "var(--surface)",
     borderRadius: 8,
     padding: 12,
-    overflow: "hidden", // ซ่อน scrollbar
+    overflow: "hidden",
   },
   list: {
     display: "flex",
@@ -17,7 +17,7 @@ const styles = {
     scrollBehavior: "smooth",
     paddingBottom: 4,
   },
-  storyCard: {
+  storyCardBase: {
     width: 112,
     height: 200,
     borderRadius: 12,
@@ -25,6 +25,12 @@ const styles = {
     backgroundColor: "var(--surface-alt)",
     position: "relative",
     flexShrink: 0,
+  },
+  imageOverlay: {
+    position: "absolute",
+    inset: 0,
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1))",
   },
   avatar: {
     position: "absolute",
@@ -35,6 +41,7 @@ const styles = {
     borderRadius: "50%",
     border: "3px solid var(--accent)",
     backgroundColor: "var(--surface)",
+    zIndex: 2,
   },
   label: {
     position: "absolute",
@@ -43,8 +50,9 @@ const styles = {
     right: 10,
     fontSize: 13,
     fontWeight: 600,
-    color: "var(--text)",
+    color: "#fff",
     textShadow: "0 1px 3px rgba(0,0,0,0.8)",
+    zIndex: 2,
   },
   arrowBtnBase: {
     position: "absolute",
@@ -58,7 +66,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0,0,0,0.6)",
     color: "#fff",
     fontSize: 18,
     zIndex: 50,
@@ -71,14 +79,15 @@ const styles = {
   },
 };
 
+// ✅ ใส่ path รูปสำหรับแต่ละ story (อยู่ใน public/images/)
 const STORIES = [
-  { id: 1, label: "สร้างสตอรี่" },
-  { id: 2, label: "Friend 1" },
-  { id: 3, label: "Friend 2" },
-  { id: 4, label: "Friend 3" },
-  { id: 5, label: "Friend 4" },
-  { id: 6, label: "Friend 5" },
-  { id: 7, label: "Friend 6" },
+  { id: 1, label: "สร้างสตอรี่", image: "/images/story1.jpg" },
+  { id: 2, label: "Friend 1", image: "/images/story2.jpg" },
+  { id: 3, label: "Friend 2", image: "/images/story3.jpg" },
+  { id: 4, label: "Friend 3", image: "/images/story4.jpg" },
+  { id: 5, label: "Friend 4", image: "/images/story5.jpg" },
+  { id: 6, label: "Friend 5", image: "/images/story6.jpg" },
+  { id: 7, label: "Friend 6", image: "/images/story7.jpg" },
 ];
 
 export default function StoriesBar() {
@@ -98,7 +107,7 @@ export default function StoriesBar() {
     updateButtons();
   }, []);
 
-  const scrollByAmount = 240; // ประมาณ 2 story
+  const scrollByAmount = 240; // เลื่อนทีละประมาณ 2 การ์ด
 
   const handleScrollLeft = () => {
     const el = listRef.current;
@@ -120,16 +129,32 @@ export default function StoriesBar() {
           ref={listRef}
           onScroll={updateButtons}
         >
-          {STORIES.map((s) => (
-            <div key={s.id} style={styles.storyCard}>
-              <div style={styles.avatar} />
-              <span style={styles.label}>{s.label}</span>
-            </div>
-          ))}
+          {STORIES.map((s) => {
+            const cardStyle = {
+              ...styles.storyCardBase,
+              ...(s.image
+                ? {
+                    backgroundImage: `url(${s.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center center",
+                    backgroundRepeat: "no-repeat",
+                  }
+                : {}),
+            };
+
+            return (
+              <div key={s.id} style={cardStyle}>
+                {/* overlay มืดด้านล่างให้ตัวหนังสืออ่านง่าย */}
+                <div style={styles.imageOverlay} />
+
+                <div style={styles.avatar} />
+                <span style={styles.label}>{s.label}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* ปุ่มเลื่อนซ้าย */}
       {canScrollLeft && (
         <button
           type="button"
@@ -140,7 +165,6 @@ export default function StoriesBar() {
         </button>
       )}
 
-      {/* ปุ่มเลื่อนขวา */}
       {canScrollRight && (
         <button
           type="button"

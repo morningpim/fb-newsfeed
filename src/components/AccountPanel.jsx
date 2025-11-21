@@ -75,7 +75,7 @@ export default function AccountPanel({
         gap: 12,
       }}
     >
-      {/* กล่องโปรไฟล์ */}
+      
       <section
         style={{
           backgroundColor: "var(--surface-alt)",
@@ -117,7 +117,7 @@ export default function AccountPanel({
         </div>
       </section>
 
-      {/* เมนูด้านล่าง */}
+      
       <section
         style={{
           backgroundColor: "var(--surface-alt)",
@@ -128,7 +128,7 @@ export default function AccountPanel({
           gap: 4,
         }}
       >
-        {/* การตั้งค่า */}
+        
         <div
           style={rowStyle}
           onMouseEnter={(e) =>
@@ -142,7 +142,7 @@ export default function AccountPanel({
           <span style={labelStyle}>การตั้งค่าและความเป็นส่วนตัว</span>
         </div>
 
-        {/* ความช่วยเหลือ */}
+        
         <div
           style={rowStyle}
           onMouseEnter={(e) =>
@@ -156,7 +156,7 @@ export default function AccountPanel({
           <span style={labelStyle}>ความช่วยเหลือและการสนับสนุน</span>
         </div>
 
-        {/* ✅ Theme row: การแสดงผลและการเข้าถึง */}
+        
         <div
           style={rowStyle}
           onClick={() => onToggleTheme && onToggleTheme()}
@@ -179,7 +179,7 @@ export default function AccountPanel({
           </div>
         </div>
 
-        {/* แสดงความคิดเห็น */}
+        
         <div
           style={rowStyle}
           onMouseEnter={(e) =>
@@ -193,7 +193,7 @@ export default function AccountPanel({
           <span style={labelStyle}>แสดงความคิดเห็น</span>
         </div>
 
-        {/* ออกจากระบบ */}
+        
         <div
           style={rowStyle}
           onMouseEnter={(e) =>
